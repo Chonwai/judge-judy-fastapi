@@ -3,16 +3,16 @@ from api.services.contract_analyzer import ContractAnalyzer
 import io
 
 ### Create FastAPI instance with custom docs and openapi url
-app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
+app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 contract_analyzer = ContractAnalyzer()
 
 
-@app.get("/api/py/helloFastApi")
+@app.get("/api/hello")
 def hello_fast_api():
     return {"message": "Hello from FastAPI"}
 
 
-@app.post("/api/py/analyze-contract")
+@app.post("/api/analyze-contract")
 async def analyze_contract(file: UploadFile):
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported")
