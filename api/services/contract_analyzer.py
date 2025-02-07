@@ -5,6 +5,7 @@ from ..config.settings import settings
 from io import BytesIO
 import json
 import os
+from pypdf import PdfReader
 
 
 class ContractAnalyzer:
@@ -16,6 +17,7 @@ class ContractAnalyzer:
             timeout=None,
             max_retries=2,
             api_key=settings.OPENAI_API_KEY,
+            model_kwargs={"response_format": {"type": "json_object"}},
         )
 
         self.prompt_template = ChatPromptTemplate.from_messages(
@@ -82,24 +84,19 @@ class ContractAnalyzer:
 
     async def analyze(self, pdf_content: bytes) -> dict:
         try:
-            # Create a temporary file-like object
-            pdf_file = BytesIO(pdf_content)
-
             # Extract text from PDF
-            text = self._extract_text_from_pdf(pdf_file)
-
+            text = self._extract_text_from_pdf(pdf_content)
+            
             # Generate the prompt
             messages = self.prompt_template.format_messages(contract_text=text)
-
+                        
             # Get response from OpenAI
             response = await self.llm.agenerate([messages])
             response_text = response.generations[0][0].text.strip()
-
             # Clean the response text
-            response_text = response_text.replace("\n", "")
-            response_text = response_text.replace("    ", "")
-
-            # Parse JSON with error handling
+            response_text = response_text.replace('\n', '')
+            response_text = response_text.replace('    ', '')
+            
             try:
                 checklist = json.loads(response_text)
             except json.JSONDecodeError as e:
@@ -154,22 +151,18 @@ class ContractAnalyzer:
             )
             raise Exception(f"Error analyzing contract: {str(e)}")
 
-    def _extract_text_from_pdf(self, pdf_file) -> str:
+    def _extract_text_from_pdf(self, pdf_content: bytes) -> str:
         try:
-            # Save temporary file
-            temp_path = "temp.pdf"
-            with open(temp_path, "wb") as f:
-                f.write(pdf_file.getvalue())
-
-            # Load and extract text
-            loader = PyPDFLoader(temp_path)
-            pages = loader.load()
-
-            # Clean up
-            os.remove(temp_path)
-
-            # Combine all pages
-            text = " ".join([page.page_content for page in pages])
-            return text
+            # 使用 BytesIO 直接在內存中處理 PDF
+            pdf_file = BytesIO(pdf_content)
+            pdf_reader = PdfReader(pdf_file)
+            
+            # 提取所有頁面的文本
+            text = ""
+            for page in pdf_reader.pages:
+                text += page.extract_text() + "\n"
+            
+            return text.strip()
+            
         except Exception as e:
             raise Exception(f"Error extracting PDF text: {str(e)}")
