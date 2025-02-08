@@ -2,11 +2,20 @@ from fastapi import FastAPI, UploadFile, HTTPException
 from api.services.contract_analyzer import ContractAnalyzer
 from api.services.resignation_validator import ResignationValidator
 import io
+from fastapi.middleware.cors import CORSMiddleware
 
 ### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 contract_analyzer = ContractAnalyzer()
 resignation_validator = ResignationValidator()
+
+# 添加 CORS 中間件
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*", "http://localhost:3000"],  # Next.js 開發服務器
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/api/hello")
