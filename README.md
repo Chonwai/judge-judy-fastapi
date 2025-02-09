@@ -88,6 +88,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 
 ## to run
-curl --location 'http://127.0.0.1:8000/api/validate-resignation' \
+curl --location 'http://127.0.0.1:8000/api/validate-resignation?safe_address=0x456F429C83945A6A5538ED08A112b2E94FB565D3' \
 --header 'accept: application/json' \
 --form 'file=@"/Users/johnku/Desktop/Data addict/4. Coding/eth-agentic-hack/for git/api/judge-judy-fastapi/SufficientNotice.eml"'
