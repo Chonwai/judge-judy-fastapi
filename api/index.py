@@ -37,7 +37,10 @@ async def analyze_contract(file: UploadFile):
 
 
 @app.post("/api/validate-resignation")
-async def validate_resignation(file: UploadFile):
+async def validate_resignation(
+    file: UploadFile,
+    safe_address: str  # Remove default value to make it required
+):
     if not file.filename.endswith(".eml"):
         raise HTTPException(status_code=400, detail="Only .eml files are supported")
 
@@ -51,14 +54,18 @@ async def validate_resignation(file: UploadFile):
             return {
                 "status": "approved",
                 "message": "Resignation request approved",
-                "details": result["checks"]
+                "details": result["checks"],
+                "safe_address": safe_address
             }
         else:
             return {
                 "status": "rejected",
                 "message": "Resignation request rejected",
-                "details": result["checks"]
+                "details": result["checks"],
+                "safe_address": safe_address
             }
             
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
