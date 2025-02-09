@@ -1,0 +1,206 @@
+Delivered-To: c@bonapp.org
+Received: by 2002:a05:6f02:671a:b0:7a:ce91:701 with SMTP id w26csp367rcg;
+        Tue, 31 Dec 2024 22:06:03 -0800 (PST)
+X-Received: by 2002:a05:6808:1707:b0:3ea:3320:385b with SMTP id 5614622812f47-3f3922bfb7bmr1387410b6e.19.1738908363245;
+        Tue, 31 Dec 2024 22:06:03 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1738908363; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Fwy8ib3WSWq5EJ4L97c0Bp4ce6g2rCWc+k8TA/WUxdsnIgPdy2Rjft4GQRN9M6Z9tD
+         U+qQjcW8Gb16Iy5j92jHltWUH7GiBJSMBXHjIoJbHAElWwzjS0IkciMqMqT+wJUtOMEx
+         xfgAreyTBZVZlib5oINA9Hvg8Cyccud6ODFoNDlfLleBcP5tavSuOoE2Iof+UKlcFZEq
+         /RM1tIPEckUCwG5yK0LVDhyRVC/t1u8k+zYtd4Q9lbxb5MsDOHFQJ+nnt106y0sm0kP+
+         DnX4PUloSqc+A9ueAF0ECqsQ1MrJiPFNpKTnms6In9FJBqYzEM80QMkNWh3eUx5FromJ
+         GGFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=p4P+MzX0BxJclojB2ZefJstVVzvA574HFKYFWqbbbpU=;
+        fh=A1KrwI/hAeRK+cTwZdpkKT74pTwkQNaoUPpjH+QusJo=;
+        b=V5Z3FiCdU+II9gds/yw22nzw2w2AB8U23T+JFYGZ2G6vTGAcJm5/j3PWHopWEoB6ES
+         1igoTs9DnQwrd+QpszJ3Y04otOW050rPxYxBfbQc0yc7F7K+6sC9tghwEIhITGfxw9pi
+         dLMno6YTPLsjFUjHbSlbjzY13WuRgLZ99gPHCKfg/boR07jx3722gm2UIETD9P9etJjH
+         W2rPP+QWAd1FI+MBgUW8uUgi6LSVhp78XHQnX2cVbu8RfEZoM4rpqVGyI8qkrXU3n/HE
+         XfP1PJvP/A0/7WateA52lFEdVfc/8XXrZjLJ59kGFEZi4FMFtoXtrxivLp6Tbif70PTa
+         h3TQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zhk7CcaB;
+       spf=pass (google.com: domain of socathie@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=socathie@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@bonapp.org
+Return-Path: <socathie@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 5614622812f47-3f390e20081sor678562b6e.7.2024.12.31.22.06.03
+        for <c@bonapp.org>
+        (Google Transport Security);
+        Tue, 31 Dec 2024 22:06:03 -0800 (PST)
+Received-SPF: pass (google.com: domain of socathie@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zhk7CcaB;
+       spf=pass (google.com: domain of socathie@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=socathie@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@bonapp.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1738908362; x=1739513162; darn=bonapp.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=p4P+MzX0BxJclojB2ZefJstVVzvA574HFKYFWqbbbpU=;
+        b=Zhk7CcaBFdh7gPRISWHcFusqBYKVO/JAYaMzpUcx1AJQYhjqgMMfhsIl0YHuCUM2nt
+         c45JSI1IIGK7VVghD7buQrfid4Q5wt/i0DQC5zw8m6H1mPXzlJVIR9p2a3gsP486hbLu
+         Vwp1ff4y2P0L2Ia2h3IfG1Lkeh7MhTymikhAOMWWTWj24NLm7VPkVRg9FJgJCOpooapV
+         EdR3R1aLK2TYNgRv9iKb2Mr9s3JfzmMu+OdiYOiUxVrjRihwTO21DV9nE+Uxi6T+FvcS
+         /dLGJGfb0CZb/5Xj+VNfDzuMH9Dyge09LgTCksnPJUPj7vigemkCkBQXLzX/j4ppAeVi
+         FKKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1738908362; x=1739513162;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=p4P+MzX0BxJclojB2ZefJstVVzvA574HFKYFWqbbbpU=;
+        b=PEmJN0FiKq0uMlcj7rDLAtzTRPPqdQXsqBO0/zd5Om7FAnVfFHa4rSkQgiyFfCpoLU
+         /VkFGO3uLWKyf0lSbUl86ixMeqCrIApHC3J5FLp/GlIC05PsmnnFwqVTFE32Bq8Um6Wg
+         P/7PoxhLrrwYiuWGYoTSALZoTNOCq8qsnfHbkWpUqz/GcQNyqlWSw1IC7S07Aid4Inqa
+         eUmodBBrLPmjF0jPfshldljfdg8DGXFcWCywaw5VMEW6LpnOksOD6v4k9nd/+7HOyy0F
+         g6HAg+TazHBncKcFEeVO4qCAN+n+aQGXm2jZySJllT0VrP1SXF26NdlcsMcaRegnIKVX
+         J/pw==
+X-Gm-Message-State: AOJu0YyWkAbscaAz6c8i/Z1OeqX1OOy9g36Crn2fN1obfHk16FBQWQM0
+	epJ+q2ZuzJOeX0suzvBGrs3roI7cRSKQZEx94DuxUOLLx1VMvLBGrsZHv1TUOsfqRQkPq+C7rlP
+	hd1AO1rfszt7q5zWdzDYBLAxU+MP1NJCXqiOJfQ==
+X-Gm-Gg: ASbGncu67MfXiHUyPYEteqIU3JohwM2Aj6Bk4Y2MCfrizoLiU1s81HJDa+R2h69ID8N
+	NthWOzXSkDBRhN4/Sd1P5FtKWsEH1k7S0DLZnySuV0gzbEjf4NyfCS343QPfSfu8mS4ZG/hbn8g
+	==
+X-Google-Smtp-Source: AGHT+IFjWHRHeF+NRNDKObN4BZF4RJGkSAO2HbPZMWwue7IDKVBvovuW45C0zH1toEAbSHU11eG9IqUkpwIdOcKuHUU=
+X-Received: by 2002:a05:6808:2118:b0:3e7:b800:fa0 with SMTP id
+ 5614622812f47-3f392278352mr1614621b6e.10.1738908362333; Tue, 31 Dec 2024
+ 22:06:02 -0800 (PST)
+MIME-Version: 1.0
+From: Cathie So <socathie@gmail.com>
+Date: Wed, 1 Jan 2025 14:05:50 +0800
+X-Gm-Features: AWEUYZkpagLSs7d7Qwu36zjgloXaeYAkdco1JZVwU2iWjgNoCGbELvD2UJvk1mE
+Message-ID: <CAB99NhQgVXZvzfAG+v6W9QXmNjxkciUG3su+LX4HPs_p3G5UAw@mail.gmail.com>
+Subject: Resignation - Bob
+To: c@bonapp.org
+Content-Type: multipart/alternative; boundary="0000000000003be678062d8727fc"
+
+--0000000000003be678062d8727fc
+Content-Type: text/plain; charset="UTF-8"
+
+Dear Alice,
+
+I am writing to formally notify you of my resignation from my position as
+Developer at Alice Limited. My last working day will be February 4, 2025.
+
+I will ensure all my current projects and responsibilities are properly
+handed over before my departure. Please let me know how I can best assist
+with the transition process.
+
+Thank you for the opportunities for growth and development during my time
+here.
+
+Best regards,
+Bob
+
+--0000000000003be678062d8727fc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span class=3D"gmail-" style=3D"box-sizing:border-box;bord=
+er:0px solid rgb(229,231,235);font-family:fkGroteskNeue,&quot;fkGroteskNeue=
+ Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui&quot;=
+,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto Sa=
+ns&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot=
+;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:16px">=
+Dear Alice,</span><div><font face=3D"fkGroteskNeue, fkGroteskNeue Fallback,=
+ ui-sans-serif, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helv=
+etica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji=
+, Segoe UI Symbol, Noto Color Emoji"><span style=3D"font-size:16px"><br></s=
+pan></font><span class=3D"gmail-mt-md gmail-block" style=3D"box-sizing:bord=
+er-box;border:0px solid rgb(229,231,235);display:block;font-family:fkGrotes=
+kNeue,&quot;fkGroteskNeue Fallback&quot;,ui-sans-serif,system-ui,-apple-sys=
+tem,&quot;system-ui&quot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&=
+quot;,Arial,&quot;Noto Sans&quot;,sans-serif,&quot;Apple Color Emoji&quot;,=
+&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emo=
+ji&quot;;font-size:16px"></span><span class=3D"gmail-" style=3D"box-sizing:=
+border-box;border:0px solid rgb(229,231,235);font-family:fkGroteskNeue,&quo=
+t;fkGroteskNeue Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;=
+system-ui&quot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Aria=
+l,&quot;Noto Sans&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Sego=
+e UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;f=
+ont-size:16px">I am writing to formally notify you of my resignation from m=
+y position as Developer at=C2=A0<span id=3D"gmail-docs-internal-guid-5fea11=
+b6-7fff-7335-9e09-aa0c278d67bf"><span style=3D"font-size:12pt;font-family:I=
+nter,sans-serif;color:rgb(0,0,0);background-color:transparent;font-variant-=
+numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norma=
+l;vertical-align:baseline">Alice Limited</span></span>. My last working day=
+ will be February 4, 2025.</span><div><font face=3D"fkGroteskNeue, fkGrotes=
+kNeue Fallback, ui-sans-serif, system-ui, -apple-system, system-ui, Segoe U=
+I, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,=
+ Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji"><span style=3D"font-siz=
+e:16px"><br></span></font><span class=3D"gmail-mt-md gmail-block" style=3D"=
+box-sizing:border-box;border:0px solid rgb(229,231,235);display:block;font-=
+family:fkGroteskNeue,&quot;fkGroteskNeue Fallback&quot;,ui-sans-serif,syste=
+m-ui,-apple-system,&quot;system-ui&quot;,&quot;Segoe UI&quot;,Roboto,&quot;=
+Helvetica Neue&quot;,Arial,&quot;Noto Sans&quot;,sans-serif,&quot;Apple Col=
+or Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot=
+;Noto Color Emoji&quot;;font-size:16px"></span><span class=3D"gmail-" style=
+=3D"box-sizing:border-box;border:0px solid rgb(229,231,235);font-family:fkG=
+roteskNeue,&quot;fkGroteskNeue Fallback&quot;,ui-sans-serif,system-ui,-appl=
+e-system,&quot;system-ui&quot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica =
+Neue&quot;,Arial,&quot;Noto Sans&quot;,sans-serif,&quot;Apple Color Emoji&q=
+uot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Colo=
+r Emoji&quot;;font-size:16px">I will ensure all my current projects and res=
+ponsibilities are properly handed over before my departure. Please let me k=
+now how I can best assist with the transition process.</span></div><div><fo=
+nt face=3D"fkGroteskNeue, fkGroteskNeue Fallback, ui-sans-serif, system-ui,=
+ -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sa=
+ns, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Co=
+lor Emoji"><span style=3D"font-size:16px"><br></span></font><span class=3D"=
+gmail-mt-md gmail-block" style=3D"box-sizing:border-box;border:0px solid rg=
+b(229,231,235);display:block;font-family:fkGroteskNeue,&quot;fkGroteskNeue =
+Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui&quot;,=
+&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto San=
+s&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;=
+,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:16px"><=
+/span><span class=3D"gmail-" style=3D"box-sizing:border-box;border:0px soli=
+d rgb(229,231,235);font-family:fkGroteskNeue,&quot;fkGroteskNeue Fallback&q=
+uot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui&quot;,&quot;Sego=
+e UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto Sans&quot;,sa=
+ns-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Seg=
+oe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:16px">Thank you f=
+or the opportunities for growth and development during my time here.</span>=
+</div><div><font face=3D"fkGroteskNeue, fkGroteskNeue Fallback, ui-sans-ser=
+if, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, =
+Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI S=
+ymbol, Noto Color Emoji"><span style=3D"font-size:16px"><br></span></font><=
+span class=3D"gmail-mt-md gmail-block" style=3D"box-sizing:border-box;borde=
+r:0px solid rgb(229,231,235);display:block;font-family:fkGroteskNeue,&quot;=
+fkGroteskNeue Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;sy=
+stem-ui&quot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,=
+&quot;Noto Sans&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe =
+UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;fon=
+t-size:16px"></span><span class=3D"gmail-" style=3D"box-sizing:border-box;b=
+order:0px solid rgb(229,231,235);font-family:fkGroteskNeue,&quot;fkGroteskN=
+eue Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui&qu=
+ot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto=
+ Sans&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&q=
+uot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:16p=
+x">Best regards,</span><span class=3D"gmail-" style=3D"box-sizing:border-bo=
+x;border:0px solid rgb(229,231,235);font-family:fkGroteskNeue,&quot;fkGrote=
+skNeue Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui=
+&quot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;N=
+oto Sans&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoj=
+i&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:=
+16px"><br style=3D"box-sizing:border-box;border:0px solid rgb(229,231,235)"=
+></span><span class=3D"gmail-" style=3D"box-sizing:border-box;border:0px so=
+lid rgb(229,231,235);font-family:fkGroteskNeue,&quot;fkGroteskNeue Fallback=
+&quot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui&quot;,&quot;Se=
+goe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto Sans&quot;,=
+sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;S=
+egoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:16px"></span><s=
+pan class=3D"gmail-" style=3D"box-sizing:border-box;border:0px solid rgb(22=
+9,231,235);margin-bottom:0px;font-family:fkGroteskNeue,&quot;fkGroteskNeue =
+Fallback&quot;,ui-sans-serif,system-ui,-apple-system,&quot;system-ui&quot;,=
+&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,&quot;Noto San=
+s&quot;,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;=
+,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;;font-size:16px">B=
+ob</span></div></div></div>
+
+--0000000000003be678062d8727fc--

@@ -37,7 +37,10 @@ async def analyze_contract(file: UploadFile):
 
 
 @app.post("/api/validate-resignation")
-async def validate_resignation(file: UploadFile):
+async def validate_resignation(
+    file: UploadFile,
+    safe_address: str = "0x456F429C83945A6A5538ED08A112b2E94FB565D3"  # Default hardcoded address
+):
     if not file.filename.endswith(".eml"):
         raise HTTPException(status_code=400, detail="Only .eml files are supported")
 
@@ -51,14 +54,21 @@ async def validate_resignation(file: UploadFile):
             return {
                 "status": "approved",
                 "message": "Resignation request approved",
-                "details": result["checks"]
+                "details": result["checks"],
+                "safe_address": safe_address  # Include safe_address in response
             }
         else:
             return {
                 "status": "rejected",
                 "message": "Resignation request rejected",
-                "details": result["checks"]
+                "details": result["checks"],
+                "safe_address": safe_address  # Include safe_address in response
             }
             
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# curl --location 'http://127.0.0.1:8000/api/validate-resignation' \
+# --header 'accept: application/json' \
+# --form 'file=@"/Users/johnku/Desktop/Data addict/4. Coding/eth-agentic-hack/for git/api/judge-judy-fastapi/SufficientNotice.eml"'

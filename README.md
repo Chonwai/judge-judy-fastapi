@@ -85,3 +85,9 @@ To learn more about Next.js, take a look at the following resources:
 - [FastAPI Documentation](https://fastapi.tiangolo.com/) - learn about FastAPI features and API.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+
+## to run
+curl --location 'http://127.0.0.1:8000/api/validate-resignation' \
+--header 'accept: application/json' \
+--form 'file=@"/Users/johnku/Desktop/Data addict/4. Coding/eth-agentic-hack/for git/api/judge-judy-fastapi/SufficientNotice.eml"'
