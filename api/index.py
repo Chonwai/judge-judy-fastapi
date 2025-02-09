@@ -1,7 +1,6 @@
 from fastapi import FastAPI, UploadFile, HTTPException
 from api.services.contract_analyzer import ContractAnalyzer
 from api.services.resignation_validator import ResignationValidator
-import io
 from fastapi.middleware.cors import CORSMiddleware
 
 ### Create FastAPI instance with custom docs and openapi url
@@ -39,14 +38,14 @@ async def analyze_contract(file: UploadFile):
 @app.post("/api/validate-resignation")
 async def validate_resignation(
     file: UploadFile,
-    safe_address: str  # Remove default value to make it required
+    safe_address: str
 ):
     if not file.filename.endswith(".eml"):
         raise HTTPException(status_code=400, detail="Only .eml files are supported")
 
     try:
         contents = await file.read()
-        result = resignation_validator.validate_resignation_email(contents)
+        result = await resignation_validator.validate_resignation_email(contents, safe_address)
         
         print(result)
         
@@ -55,7 +54,8 @@ async def validate_resignation(
                 "status": "approved",
                 "message": "Resignation request approved",
                 "details": result["checks"],
-                "safe_address": safe_address
+                "safe_address": safe_address,
+                "agent_notified": result.get("agent_notified", False)
             }
         else:
             return {

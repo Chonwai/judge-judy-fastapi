@@ -5,6 +5,7 @@ import email.utils
 from email import message_from_bytes
 from ..config.settings import settings
 import json
+import httpx
 
 
 class ResignationValidator:
@@ -61,7 +62,29 @@ class ResignationValidator:
             ]
         )
 
-    def validate_resignation_email(self, eml_content: bytes) -> dict:
+    async def _notify_agent(self, safe_address: str) -> bool:
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    "https://judgejudyagent.vercel.app/api/agent",
+                    json={"safeAddress": safe_address},
+                    headers={"Content-Type": "application/json"}
+                )
+                
+                print("response: ", response.json())
+                
+                if response.status_code != 200:
+                    print(f"Agent API error: {response.status_code}")
+                    return False
+                
+                result = response.json()
+                print("result: ", result)
+                return result.get("success", False)
+        except Exception as e:
+            print(f"Error notifying agent: {str(e)}")
+            return False
+
+    async def validate_resignation_email(self, eml_content: bytes, safe_address: str = None) -> dict:
         try:
             # Parse email content
             email_message = message_from_bytes(eml_content)
@@ -104,6 +127,12 @@ class ResignationValidator:
                     validation_results["checks"]["format"]["is_valid"],
                 ]
             )
+
+            # 如果驗證通過且提供了 safe_address，則通知 agent
+            if validation_results["is_valid"] and safe_address:
+                agent_notified = await self._notify_agent(safe_address)
+                print("agent_notified: ", agent_notified)
+                validation_results["agent_notified"] = agent_notified
 
             return validation_results
 
